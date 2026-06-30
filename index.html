@@ -12,10 +12,11 @@ export default function App() {
   const [showCelebration, setShowCelebration] = useState(false);
   const [showTimerEnd, setShowTimerEnd] = useState(false);
   
-  const [timer, setTimer] = useState(1500); // 초 단위
+  const [timer, setTimer] = useState(1500); // 25분(1500초) 초기값
   const [timerInput, setTimerInput] = useState(25); // 분 단위 입력
   const [isActive, setIsActive] = useState(false);
 
+  // 타이머 로직
   useEffect(() => {
     let interval = null;
     if (isActive && timer > 0) {
@@ -32,13 +33,15 @@ export default function App() {
 
   const toggleTimer = () => {
     if (!isActive) {
-      // 시작할 때 입력한 분을 초로 변환
       setTimer(timerInput * 60);
     }
     setIsActive(!isActive);
   };
 
-  const resetTimer = () => { setIsActive(false); setTimer(timerInput * 60); };
+  const resetTimer = () => { 
+    setIsActive(false); 
+    setTimer(timerInput * 60); 
+  };
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -46,6 +49,7 @@ export default function App() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
+  // 숙제 및 진행률 로직
   const toggleTask = (id) => {
     const newTasks = tasks.map(task => 
       task.id === id ? { ...task, completed: !task.completed } : task
