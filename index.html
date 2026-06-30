@@ -12,11 +12,10 @@ export default function App() {
   const [showCelebration, setShowCelebration] = useState(false);
   const [showTimerEnd, setShowTimerEnd] = useState(false);
   
-  const [timer, setTimer] = useState(1500); // 25분(1500초) 초기값
-  const [timerInput, setTimerInput] = useState(25); // 분 단위 입력
+  const [timer, setTimer] = useState(1500); 
+  const [timerInput, setTimerInput] = useState(25);
   const [isActive, setIsActive] = useState(false);
 
-  // 타이머 로직
   useEffect(() => {
     let interval = null;
     if (isActive && timer > 0) {
@@ -49,7 +48,6 @@ export default function App() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  // 숙제 및 진행률 로직
   const toggleTask = (id) => {
     const newTasks = tasks.map(task => 
       task.id === id ? { ...task, completed: !task.completed } : task
@@ -81,7 +79,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans relative">
-      {/* 축하 메시지 */}
       {showCelebration && (
         <div className="absolute inset-0 bg-indigo-600/90 z-50 flex items-center justify-center text-white flex-col animate-pulse">
           <h1 className="text-6xl font-black mb-4">축하합니다!</h1>
@@ -89,7 +86,6 @@ export default function App() {
         </div>
       )}
 
-      {/* 타이머 종료 메시지 */}
       {showTimerEnd && (
         <div className="absolute inset-0 bg-blue-500/90 z-50 flex items-center justify-center text-white flex-col">
           <h1 className="text-6xl font-black mb-4">타이머 끝!</h1>
@@ -103,7 +99,6 @@ export default function App() {
 
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        {/* 왼쪽: 타이머 및 진행률 */}
         <div className="flex flex-col gap-6">
           <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-slate-200 flex flex-col items-center">
             <h3 className="font-bold text-slate-500 mb-2">집중 타이머</h3>
@@ -141,7 +136,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* 오른쪽: 숙제 관리 */}
         <div className="bg-white p-6 rounded-2xl shadow-lg border-2 border-slate-200">
           <div className="flex flex-col gap-2 mb-4">
             <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="p-2 border rounded-lg bg-slate-100">
